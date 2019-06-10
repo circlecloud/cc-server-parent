@@ -1,6 +1,6 @@
 {
     "name": "cc-server-db-mongo",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
     "homepage": "https://faas.yumc.pw",
@@ -13,7 +13,7 @@
         "test": "echo \"Error: run tests from root\" && exit 1"
     },
     "dependencies": {
-        "cc-server-ioc": "^0.0.1",
+        "cc-server-ioc": "^0.0.2",
         "inversify": "^5.0.1",
         "mongodb": "^3.2.7",
         "reflect-metadata": "^0.1.13"
