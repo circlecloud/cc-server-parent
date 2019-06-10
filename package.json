@@ -1,0 +1,14 @@
+{
+    "private": true,
+    "name": "cc-server-parent",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "MiaoWoo <admin@yumc.pw>",
+    "license": "MIT",
+    "workspaces": [
+        "packages/*"
+    ],
+    "devDependencies": {
+        "lerna": "^3.14.1"
+    }
+}

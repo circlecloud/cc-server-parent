@@ -1,0 +1,29 @@
+{
+    "name": "cc-server-core",
+    "version": "0.0.1",
+    "description": "> TODO: description",
+    "author": "MiaoWoo <admin@yumc.pw>",
+    "homepage": "https://faas.yumc.pw",
+    "license": "ISC",
+    "main": "dist/index.js",
+    "publishConfig": {
+        "registry": "https://repo.yumc.pw/repository/npm-hosted/"
+    },
+    "scripts": {
+        "dev": "npx ts-node src/index.ts",
+        "test": "echo \"Error: run tests from root\" && exit 1"
+    },
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cc-server-db-mongo": "^0.0.1",
+        "cc-server-ioc": "^0.0.1",
+        "inversify": "^5.0.1",
+        "inversify-express-utils": "^6.3.2",
+        "reflect-metadata": "^0.1.13",
+        "typescript": "^3.5.1"
+    },
+    "devDependencies": {
+        "@types/body-parser": "^1.17.0",
+        "ts-node": "^8.2.0"
+    }
+}
