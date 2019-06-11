@@ -1,6 +1,9 @@
 {
     "npmClient": "yarn",
     "useWorkspaces": true,
+    "scripts": {
+        "build": "npx tsc"
+    },
     "packages": [
         "packages/*"
     ],

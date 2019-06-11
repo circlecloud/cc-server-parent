@@ -1,19 +1,11 @@
 import 'reflect-metadata';
 import { InversifyExpressServer } from 'inversify-express-utils';
-import { Container } from 'inversify';
 import * as bodyParser from 'body-parser';
+import { container, buildProviderModule } from 'cc-server-ioc';
+
 import './function/handle';
-import { METADATA_KEY } from 'cc-server-ioc';
 
-// load everything needed to the Container
-let container = new Container();
-Reflect.defineMetadata(METADATA_KEY.container, container, Reflect)
-
-// auto load service
-let services: Function[] = Reflect.getMetadata(METADATA_KEY.service, Reflect);
-for (const service of services) {
-    service()
-}
+container.load(buildProviderModule());
 
 // start the server
 let server = new InversifyExpressServer(container);

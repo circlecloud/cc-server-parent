@@ -10,10 +10,14 @@
         "registry": "https://repo.yumc.pw/repository/npm-hosted/"
     },
     "scripts": {
+        "build": "npx tsc",
         "test": "echo \"Error: run tests from root\" && exit 1"
     },
     "dependencies": {
         "inversify": "^5.0.1",
-        "reflect-metadata": "^0.1.13"
-    }
+        "inversify-binding-decorators": "^4.0.0",
+        "reflect-metadata": "^0.1.13",
+        "typescript": "^3.5.1"
+    },
+    "gitHead": "7d84393a3cb6be6be9ed51d71f12677d2d7d0728"
 }

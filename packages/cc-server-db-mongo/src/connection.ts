@@ -1,7 +1,7 @@
 import { Db, MongoClient } from 'mongodb';
 
-const connStr = process.env.MONGO_URL || 'mongodb://192.168.0.2:27017';
-const dbName = process.env.MONGO_DB || "frppool";
+const connStr = process.env.FAAS_MONGO_URL || 'mongodb://192.168.0.2:27017';
+const dbName = process.env.FAAS_MONGO_DB || "frppool";
 
 export class MongoDBConnection {
     private static isConnected: boolean = false;

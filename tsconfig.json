@@ -1,8 +1,11 @@
 {
     "compilerOptions": {
+        "baseUrl": "src",
+        "outDir": "dist",
         "target": "es6",
         "module": "commonjs",
         "sourceMap": true,
+        "declaration": true,
         "allowUnreachableCode": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true

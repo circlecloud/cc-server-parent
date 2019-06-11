@@ -1,17 +1,10 @@
-import { Db, ObjectID, UpdateWriteOpResult } from 'mongodb';
-import { injectable } from 'inversify';
+import { Db, ObjectID } from 'mongodb';
 import { MongoDBConnection } from './connection';
-import { service } from 'cc-server-ioc'
+import { provide } from 'cc-server-ioc'
+import { DBClient } from 'cc-server-db'
 
-interface DBClient<T = any> {
-    find(table: string, where: object): T
-}
-
-export const NAME: string = 'MongoDBClient'
-
-@service()
-@injectable()
-export class MongoDBClient<T = any> implements DBClient {
+@provide(DBClient)
+export class MongoDBClient<T = any> {
     public db: Db;
 
     constructor() {
@@ -20,8 +13,8 @@ export class MongoDBClient<T = any> implements DBClient {
         });
     }
 
-    public find(collection: string, filter: object): Promise<T[]> {
-        return this.db.collection(collection).find(filter).toArray();
+    public async find(collection: string, filter: object): Promise<T[]> {
+        return await this.db.collection(collection).find(filter).toArray();
     }
 
     public async findOne(collection: string, filter: Object): Promise<T> {
@@ -30,7 +23,7 @@ export class MongoDBClient<T = any> implements DBClient {
     }
 
     public async findOneById(collection: string, objectId: string): Promise<T> {
-        return this.findOne(collection, { _id: new ObjectID(objectId) })
+        return await this.findOne(collection, { _id: new ObjectID(objectId) })
     }
 
     public async insertOne(collection: string, model: T): Promise<T> {
@@ -38,12 +31,13 @@ export class MongoDBClient<T = any> implements DBClient {
         return insert.ops[0];
     }
 
-    public updateOne(collection: string, where: any, model: any): Promise<UpdateWriteOpResult> {
-        return this.db.collection(collection).updateOne(where, { $set: model });
+    public async updateOne(collection: string, where: any, model: any): Promise<boolean> {
+        let result = await this.db.collection(collection).updateOne(where, { $set: model });
+        return result.result.ok == 1 && result.result.n > 0;
     }
 
-    public updateById(collection: string, objectId: string, model: any): Promise<UpdateWriteOpResult> {
-        return this.updateOne(collection, { _id: new ObjectID(objectId) }, { $set: model })
+    public async updateById(collection: string, objectId: string, model: any): Promise<boolean> {
+        return await this.updateOne(collection, { _id: new ObjectID(objectId) }, { $set: model })
     }
 
     public async deleteOne(collection: string, where: any): Promise<boolean> {
