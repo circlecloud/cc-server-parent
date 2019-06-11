@@ -1,12 +1,12 @@
 import {
-    controller, response, requestBody, httpGet, httpPost, queryParam
+    controller, response, requestBody, httpGet, httpPost, queryParam, requestParam
 } from 'inversify-express-utils';
 import { inject } from 'inversify';
 import { DBClient } from 'cc-server-db'
 import 'cc-server-db-mongo'
 
 //process.env.FAAS_MONGO_URL = 'mongodb://192.168.0.2:27017';
-process.env.FAAS_MONGO_DB = "faas";
+//process.env.FAAS_MONGO_DB = "faas";
 
 const TABLE = 'users'
 
@@ -32,7 +32,7 @@ export class Controller {
 
     @httpGet('/:id')
     public async get(
-        @queryParam('id') id: string
+        @requestParam('id') id: string
     ): Promise<Model> {
         return this.client.findOneById(TABLE, id);
     }
@@ -46,7 +46,7 @@ export class Controller {
 
     @httpPost('/:id')
     public async update(
-        @queryParam('id') id: string,
+        @requestParam('id') id: string,
         @requestBody() model: Model
     ): Promise<boolean> {
         return this.client.updateById(TABLE, id, model);
