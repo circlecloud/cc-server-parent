@@ -5,6 +5,10 @@
     "main": "index.js",
     "author": "MiaoWoo <admin@yumc.pw>",
     "license": "MIT",
+    "scripts": {
+        "prepublish": "npx lerna run build",
+        "lp": "npx lerna publish"
+    },
     "workspaces": [
         "packages/*"
     ],
