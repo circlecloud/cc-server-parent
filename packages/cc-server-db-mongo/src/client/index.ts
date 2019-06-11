@@ -4,13 +4,17 @@ import { provide } from 'cc-server-ioc'
 import { DBClient } from 'cc-server-db'
 
 @provide(DBClient)
-export class MongoDBClient<T = any> {
+export class MongoDBClient<T = any> implements DBClient {
     public db: Db;
 
     constructor() {
         MongoDBConnection.getConnection((connection) => {
             this.db = connection;
         });
+    }
+
+    public getProvide(): Db {
+        return this.db;
     }
 
     public async find(collection: string, filter: object): Promise<T[]> {
