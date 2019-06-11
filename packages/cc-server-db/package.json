@@ -14,7 +14,7 @@
         "url": "git+https://github.com/502647092/cc-server-parent.git"
     },
     "scripts": {
-        "build": "npx tsc",
+        "build": "rimraf dist && npx tsc",
         "test": "echo \"Error: run tests from root\" && exit 1"
     },
     "bugs": {
@@ -23,5 +23,8 @@
     "homepage": "https://github.com/502647092/cc-server-parent#readme",
     "dependencies": {
         "typescript": "^3.5.1"
+    },
+    "devDependencies": {
+        "rimraf": "^2.6.3"
     }
 }
