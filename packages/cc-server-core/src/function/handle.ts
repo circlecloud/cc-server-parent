@@ -1,7 +1,7 @@
 import {
     controller, response, requestBody, httpGet, httpPost, queryParam, requestParam
 } from 'inversify-express-utils';
-import { inject } from 'inversify';
+import { inject, postConstruct } from 'inversify';
 import { DBClient } from 'cc-server-db'
 import 'cc-server-db-mongo'
 
@@ -20,28 +20,33 @@ interface ExampleModel {
 
 type Model = ExampleModel
 
-@controller('/')
+@controller('')
 export class Controller {
     @inject(DBClient)
     private client: DBClient
 
+    @postConstruct()
+    private init(): void {
+        this.client.setTable(TABLE);
+    }
+
     @httpGet('/')
     public async list(): Promise<Model[]> {
-        return this.client.find(TABLE, {});
+        return this.client.find({});
     }
 
     @httpGet('/:id')
     public async get(
         @requestParam('id') id: string
     ): Promise<Model> {
-        return this.client.findOneById(TABLE, id);
+        return this.client.findOneById(id);
     }
 
     @httpPost('/')
     public async create(
         @requestBody() model: Model
     ): Promise<Model> {
-        return this.client.insertOne(TABLE, model);
+        return this.client.insertOne(model);
     }
 
     @httpPost('/:id')
@@ -49,6 +54,6 @@ export class Controller {
         @requestParam('id') id: string,
         @requestBody() model: Model
     ): Promise<boolean> {
-        return this.client.updateById(TABLE, id, model);
+        return this.client.updateById(id, model);
     }
 }
