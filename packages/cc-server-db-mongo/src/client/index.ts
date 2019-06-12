@@ -5,12 +5,16 @@ import { DBClient } from 'cc-server-db'
 
 @provide(DBClient)
 export class MongoDBClient<T = any> implements DBClient {
+    private table: string;
     private db: Db;
     private collection: Collection;
 
     constructor() {
         MongoDBConnection.getConnection((connection) => {
             this.db = connection;
+            if (this.table) {
+                this.collection = this.db.collection(this.table);
+            }
         });
     }
 
@@ -19,7 +23,10 @@ export class MongoDBClient<T = any> implements DBClient {
     }
 
     public setTable(table: string): void {
-        this.collection = this.db.collection(table);
+        this.table = table;
+        if (this.db) {
+            this.collection = this.db.collection(table);
+        }
     }
 
     public async find(filter: object): Promise<T[]> {
