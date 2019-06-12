@@ -7,7 +7,7 @@ import { DBClient } from 'cc-server-db'
 export class MongoDBClient<T = any> implements DBClient {
     private table: string;
     private db: Db;
-    private collection: Collection;
+    private collection: Collection<T>;
 
     constructor() {
         MongoDBConnection.getConnection((connection) => {
@@ -18,8 +18,8 @@ export class MongoDBClient<T = any> implements DBClient {
         });
     }
 
-    public getProvide(): Db {
-        return this.db;
+    public getProvide<P>(): P {
+        return this.db as {} as P;
     }
 
     public setTable(table: string): void {

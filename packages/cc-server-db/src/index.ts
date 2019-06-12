@@ -1,6 +1,6 @@
 export const DBClient = Symbol.for('DBClient')
 export interface DBClient<T = any> {
-    getProvide(): any;
+    getProvide<P>(): P;
     setTable(table: string): void;
     find(filter: object): Promise<T[]>;
     findOne(filter: Object): Promise<T>;
