@@ -1,6 +1,6 @@
 {
     "name": "cc-server-core",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
     "homepage": "https://faas.yumc.pw",
@@ -16,7 +16,7 @@
     },
     "dependencies": {
         "body-parser": "^1.19.0",
-        "cc-server-db-mongo": "^0.2.3",
+        "cc-server-db-mongo": "^0.2.4",
         "cc-server-ioc": "^0.2.2",
         "inversify": "^5.0.1",
         "inversify-express-utils": "^6.3.2",
