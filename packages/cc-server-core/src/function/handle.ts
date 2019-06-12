@@ -27,9 +27,7 @@ export class Controller {
 
     @postConstruct()
     private init(): void {
-        setTimeout(() => {
-            this.client.setTable(TABLE);
-        }, 50)
+        this.client.setTable(TABLE);
     }
 
     @httpGet('/')
