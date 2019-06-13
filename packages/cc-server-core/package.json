@@ -20,6 +20,7 @@
         "cc-server-ioc": "^0.2.2",
         "inversify": "^5.0.1",
         "inversify-express-utils": "^6.3.2",
+        "prettyjson": "^1.2.1",
         "reflect-metadata": "^0.1.13",
         "typescript": "^3.5.1"
     },

@@ -53,7 +53,7 @@ export class MongoDBClient<T = any> implements DBClient {
     }
 
     public async updateById(objectId: string, model: any): Promise<boolean> {
-        return await this.updateOne({ _id: new ObjectID(objectId) }, { $set: model })
+        return await this.updateOne({ _id: new ObjectID(objectId) }, model)
     }
 
     public async deleteOne(where: any): Promise<boolean> {

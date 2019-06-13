@@ -1,7 +1,8 @@
 import 'reflect-metadata';
-import { InversifyExpressServer } from 'inversify-express-utils';
+import { InversifyExpressServer, getRouteInfo } from 'inversify-express-utils';
 import * as bodyParser from 'body-parser';
 import { container, buildProviderModule } from 'cc-server-ioc';
+import * as prettyjson from "prettyjson";
 
 import './function/handle';
 
@@ -19,6 +20,11 @@ server.setConfig((app) => {
 });
 
 let serverInstance = server.build();
+
+const routeInfo = getRouteInfo(container);
+
+console.log(prettyjson.render({ routes: routeInfo }));
+
 serverInstance.listen(80);
 
 console.log('Server started on port 80 :)');
