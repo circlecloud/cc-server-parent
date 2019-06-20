@@ -1,6 +1,6 @@
 {
     "name": "cc-server-core",
-    "version": "0.2.5",
+    "version": "0.3.0",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
     "homepage": "https://github.com/502647092/cc-server-parent#readme",
@@ -21,9 +21,9 @@
     },
     "dependencies": {
         "body-parser": "^1.19.0",
-        "cc-server-binding": "^0.2.5",
-        "cc-server-db-mongo": "^0.2.5",
-        "cc-server-ioc": "^0.2.5",
+        "cc-server-binding": "^0.3.0",
+        "cc-server-db-mongo": "^0.3.0",
+        "cc-server-ioc": "^0.3.0",
         "inversify": "^5.0.1",
         "inversify-express-utils": "^6.3.2",
         "prettyjson": "^1.2.1",

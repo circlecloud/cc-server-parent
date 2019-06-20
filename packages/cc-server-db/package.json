@@ -1,6 +1,6 @@
 {
     "name": "cc-server-db",
-    "version": "0.2.5",
+    "version": "0.3.0",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
     "homepage": "https://github.com/502647092/cc-server-parent#readme",
@@ -24,6 +24,5 @@
         "mocha": "^6.1.4",
         "rimraf": "^2.6.3",
         "typescript": "^3.5.1"
-    },
-    "dependencies": {}
+    }
 }
