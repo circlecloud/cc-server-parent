@@ -1,0 +1,33 @@
+{
+    "name": "cc-server-binding",
+    "version": "0.2.5",
+    "description": "> TODO: description",
+    "author": "MiaoWoo <admin@yumc.pw>",
+    "homepage": "https://github.com/502647092/cc-server-parent#readme",
+    "license": "ISC",
+    "main": "dist/index.js",
+    "publishConfig": {
+        "registry": "https://repo.yumc.pw/repository/npm/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/502647092/cc-server-parent.git"
+    },
+    "scripts": {
+        "dev": "npx ts-node src/index.ts",
+        "build": "rimraf dist && npx tsc",
+        "test": "echo \"Error: run tests from root\" && exit 1"
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "reflect-metadata": "^0.1.13"
+    },
+    "devDependencies": {
+        "mocha": "^6.1.4",
+        "rimraf": "^2.6.3",
+        "typescript": "^3.5.1"
+    },
+    "bugs": {
+        "url": "https://github.com/502647092/cc-server-parent/issues"
+    }
+}
