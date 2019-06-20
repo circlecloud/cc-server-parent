@@ -1,17 +1,20 @@
 {
-    "private": true,
-    "name": "cc-server-parent",
-    "version": "1.0.0",
-    "main": "index.js",
-    "author": "MiaoWoo <admin@yumc.pw>",
-    "license": "MIT",
-    "scripts": {
-        "lp": "npx lerna publish"
-    },
-    "workspaces": [
-        "packages/*"
-    ],
-    "devDependencies": {
-        "lerna": "^3.14.1"
-    }
+  "private": true,
+  "name": "cc-server-parent",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "MiaoWoo <admin@yumc.pw>",
+  "license": "MIT",
+  "scripts": {
+    "build": "npx lerna run build",
+    "lp": "npx lerna publish",
+    "publish-please": "publish-please",
+    "prepublishOnly": "publish-please guard"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^3.14.1"
+  }
 }

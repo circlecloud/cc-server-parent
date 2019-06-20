@@ -3,32 +3,40 @@
     "version": "0.2.5",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
-    "homepage": "https://faas.yumc.pw",
+    "homepage": "https://github.com/502647092/cc-server-parent#readme",
     "license": "ISC",
     "main": "dist/index.js",
     "publishConfig": {
         "registry": "https://repo.yumc.pw/repository/npm-hosted/"
     },
     "scripts": {
-        "dev": "npx ts-node src/index.ts",
+        "dev": "npx ts-node-dev --respawn --prefer-ts --debounce=1500 src/index.ts",
+        "watch": "npx tsc --watch",
         "build": "rimraf dist && npx tsc",
         "test": "echo \"Error: run tests from root\" && exit 1"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/502647092/cc-server-parent.git"
+    },
     "dependencies": {
         "body-parser": "^1.19.0",
+        "cc-server-binding": "^0.2.5",
         "cc-server-db-mongo": "^0.2.5",
         "cc-server-ioc": "^0.2.5",
         "inversify": "^5.0.1",
         "inversify-express-utils": "^6.3.2",
         "prettyjson": "^1.2.1",
-        "reflect-metadata": "^0.1.13",
-        "typescript": "^3.5.1"
+        "reflect-metadata": "^0.1.13"
     },
     "devDependencies": {
         "@types/body-parser": "^1.17.0",
         "@types/express": "^4.17.0",
+        "mocha": "^6.1.4",
         "rimraf": "^2.6.3",
-        "ts-node": "^8.2.0"
+        "ts-node": "^8.2.0",
+        "ts-node-dev": "^1.0.0-pre.40",
+        "typescript": "^3.5.1"
     },
     "gitHead": "7d84393a3cb6be6be9ed51d71f12677d2d7d0728"
 }

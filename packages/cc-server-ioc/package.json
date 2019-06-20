@@ -13,14 +13,20 @@
         "build": "rimraf dist && npx tsc",
         "test": "echo \"Error: run tests from root\" && exit 1"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/502647092/cc-server-parent.git"
+    },
     "dependencies": {
         "inversify": "^5.0.1",
         "inversify-binding-decorators": "^4.0.0",
         "reflect-metadata": "^0.1.13",
-        "typescript": "^3.5.1"
+        "ts-node-dev": "^1.0.0-pre.40"
     },
     "devDependencies": {
-        "rimraf": "^2.6.3"
+        "mocha": "^6.1.4",
+        "rimraf": "^2.6.3",
+        "typescript": "^3.5.1"
     },
     "gitHead": "7d84393a3cb6be6be9ed51d71f12677d2d7d0728"
 }
