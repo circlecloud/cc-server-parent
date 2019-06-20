@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { Container, inject } from 'inversify';
+import { Container, inject, interfaces } from 'inversify';
 import { autoProvide, provide, fluentProvide, buildProviderModule } from 'inversify-binding-decorators';
 
 let container = new Container();
@@ -7,13 +7,13 @@ let container = new Container();
 // a module to be loaded by the container
 // container.load(buildProviderModule());
 
-const provideNamed = (identifier, name) => {
+const provideNamed = (identifier: interfaces.ServiceIdentifier<any>, name: string) => {
     return fluentProvide(identifier)
         .whenTargetNamed(name)
         .done();
 };
 
-const provideSingleton = (identifier: any) => {
+const provideSingleton = (identifier: interfaces.ServiceIdentifier<any>) => {
     return fluentProvide(identifier)
         .inSingletonScope()
         .done();
