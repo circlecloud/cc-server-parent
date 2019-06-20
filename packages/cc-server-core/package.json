@@ -10,7 +10,7 @@
         "registry": "https://repo.yumc.pw/repository/npm-hosted/"
     },
     "scripts": {
-        "dev": "npx ts-node-dev --respawn --prefer-ts --debounce=1500 src/index.ts",
+        "dev": "npx ts-node-dev --respawn --prefer-ts --debounce=1500 src/server.ts",
         "watch": "npx tsc --watch",
         "build": "rimraf dist && npx tsc",
         "test": "echo \"Error: run tests from root\" && exit 1"

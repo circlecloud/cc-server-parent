@@ -1,33 +1,45 @@
 import 'reflect-metadata';
-import { InversifyExpressServer, getRouteInfo } from 'inversify-express-utils';
+import * as express from "express";
+import { InversifyExpressServer, interfaces, getRouteInfo } from 'inversify-express-utils';
 import * as bodyParser from 'body-parser';
 import { rebuildServer } from 'cc-server-binding'
 import { container, buildProviderModule } from 'cc-server-ioc';
 import * as prettyjson from "prettyjson";
 
-import './function/handle';
+export class CcServerBoot {
+    private server: InversifyExpressServer;
+    private serverInstance: express.Application;
+    constructor() {
+        container.load(buildProviderModule());
+        // start the server
+        this.server = new InversifyExpressServer(container);
+        this.server.setConfig((app) => {
+            app.use(bodyParser.urlencoded({
+                extended: true
+            }));
+            app.use(bodyParser.json());
+            app.use(bodyParser.raw());
+        });
+    }
 
-container.load(buildProviderModule());
+    public setConfig(fn: interfaces.ConfigFunction) {
+        this.server.setConfig(fn)
+    }
 
-// start the server
-let server = new InversifyExpressServer(container);
+    public setErrorConfig(fn: interfaces.ConfigFunction) {
+        this.server.setErrorConfig(fn)
+    }
 
-server.setConfig((app) => {
-    app.use(bodyParser.urlencoded({
-        extended: true
-    }));
-    app.use(bodyParser.json());
-    app.use(bodyParser.raw());
-});
+    public build() {
+        this.serverInstance = this.server.build();
+        rebuildServer(container);
+        return this.serverInstance;
+    }
 
-let serverInstance = server.build();
-
-rebuildServer(container);
-
-const routeInfo = getRouteInfo(container);
-
-console.log(prettyjson.render({ routes: routeInfo }));
-
-serverInstance.listen(80);
-
-console.log('Server started on port 80 :)');
+    public start() {
+        const routeInfo = getRouteInfo(container);
+        console.log(prettyjson.render({ routes: routeInfo }));
+        this.serverInstance.listen(80);
+        console.log('Server started on port 80 :)');
+    }
+}
