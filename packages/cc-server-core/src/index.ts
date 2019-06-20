@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { InversifyExpressServer, getRouteInfo } from 'inversify-express-utils';
 import * as bodyParser from 'body-parser';
+import { rebuildServer } from 'cc-server-binding'
 import { container, buildProviderModule } from 'cc-server-ioc';
 import * as prettyjson from "prettyjson";
 
@@ -16,10 +17,12 @@ server.setConfig((app) => {
         extended: true
     }));
     app.use(bodyParser.json());
-    app.use(bodyParser.raw())
+    app.use(bodyParser.raw());
 });
 
 let serverInstance = server.build();
+
+rebuildServer(container);
 
 const routeInfo = getRouteInfo(container);
 

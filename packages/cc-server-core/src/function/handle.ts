@@ -2,6 +2,7 @@ import {
     controller, response, requestBody, httpGet, httpPost, queryParam, requestParam
 } from 'inversify-express-utils';
 import { inject, postConstruct } from 'inversify';
+import { Vaild, NotBlank, NotNull } from 'cc-server-binding'
 import { DBClient } from 'cc-server-db'
 import 'cc-server-db-mongo'
 
@@ -10,10 +11,12 @@ import 'cc-server-db-mongo'
 
 const TABLE = 'users'
 
-interface ExampleModel {
+class ExampleModel {
     _id: string;
+    @NotBlank("用户名不得为空!")
     username: string;
     password: string;
+    @NotNull()
     age: number;
     email: string;
 }
@@ -44,9 +47,10 @@ export class Controller {
 
     @httpPost('/')
     public async create(
-        @requestBody() model: Model
-    ): Promise<Model> {
-        return this.client.insertOne(model);
+        @Vaild() @requestBody() model: ExampleModel
+    ): Promise<ExampleModel> {
+        //return this.client.insertOne(model);
+        return this.client.findOneById('5d0af7c039179a28de618cb8');
     }
 
     @httpPost('/:id')
