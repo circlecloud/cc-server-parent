@@ -1,7 +1,7 @@
 import { Container, interfaces as inversify_interfaces } from 'inversify'
 import { TYPE, interfaces as express_interfaces } from 'inversify-express-utils'
-import { METADATA_KEY, VAILD_TYPE } from './constants'
-import { interfaces } from './interfaces'
+import { METADATA_KEY } from './constants'
+import { VaildError } from './interfaces'
 import { getVaildMethodMetadata, getVaildControllerMetadata, getVaildModelMetadata } from './utils'
 
 let handler = {
@@ -12,32 +12,24 @@ let handler = {
             // loop @Valid params
             for (const param of methodParams) {
                 // get function argument value
-                let origin = argumentsList[param.index]
+                let origin = argumentsList[param.index];
                 let props = getVaildModelMetadata(param.type);
                 for (const prop of props) {
-                    let propValue = origin[prop.name];
-                    switch (prop.type) {
-                        case VAILD_TYPE.NOT_BLANK:
-                            if (!propValue) {
-                                throw new Error(prop.message);
-                            }
-                            break;
-                        case VAILD_TYPE.NOT_NULL:
-                            if (propValue == undefined) {
-                                throw new Error(prop.message);
-                            }
-                            break;
-                        default:
-                            throw new Error('Unkonw Vaild Type!')
+                    if (!prop.handle(origin[prop.name])) {
+                        throw new VaildError(prop.message);
                     }
                 }
             }
             return target.apply(thisArgument, argumentsList);
         } catch (ex) {
-            res.status(400).json({
-                status: 400,
-                message: ex.message
-            })
+            if (ex instanceof VaildError) {
+                res.status(400).json({
+                    status: 400,
+                    message: ex.message
+                })
+                return;
+            }
+            throw ex;
         }
     }
 }

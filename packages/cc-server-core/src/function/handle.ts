@@ -13,7 +13,7 @@ const TABLE = 'users'
 
 class ExampleModel {
     _id: string;
-    @NotBlank("用户名不得为空!")
+    @NotBlank("username must not be blank!")
     username: string;
     password: string;
     @NotNull()
@@ -49,8 +49,8 @@ export class Controller {
     public async create(
         @Vaild() @requestBody() model: ExampleModel
     ): Promise<ExampleModel> {
+        return model;
         //return this.client.insertOne(model);
-        return this.client.findOneById('5d0af7c039179a28de618cb8');
     }
 
     @httpPost('/:id')

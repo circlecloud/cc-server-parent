@@ -1,6 +1,10 @@
 import { VAILD_TYPE } from './constants'
 
-namespace interfaces {
+export class VaildError extends Error { }
+
+export declare type VaildFunction = (param: object) => boolean;
+
+export namespace interfaces {
     export interface MethodMetadata {
         [methodName: string]: ParameterMetadata[];
     }
@@ -11,10 +15,9 @@ namespace interfaces {
     }
 
     export interface PropertyMetadata {
+        type: VAILD_TYPE;
         name: string;
         message: string;
-        type: VAILD_TYPE;
+        handle: VaildFunction;
     }
 }
-
-export { interfaces };

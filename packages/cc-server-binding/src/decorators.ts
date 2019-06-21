@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { METADATA_KEY, VAILD_TYPE } from './constants';
 import { getVaildControllerMetadata, getVaildModelMetadata } from './utils'
-import { interfaces } from './interfaces'
+import { VaildFunction, interfaces } from './interfaces'
 /**
  * ParameterVaild
  */
@@ -20,18 +20,26 @@ export function Vaild(): ParameterDecorator {
     }
 }
 
+let vaildFunctions: {
+    [methodName: string]: VaildFunction;
+} = {};
+
 /**
  * Vaild Blank String
  * @param message Error Message
  */
-export const NotBlank: (message?: string) => PropertyDecorator = vaildDecoratorFactory(VAILD_TYPE.NOT_BLANK);
+export const NotBlank: (message?: string) => PropertyDecorator = vaildDecoratorFactory(
+    VAILD_TYPE.NOT_BLANK, (param) => !!param);
 /**
  * Vaild Null Param
  * @param message Error Message
  */
-export const NotNull: (message?: string) => PropertyDecorator = vaildDecoratorFactory(VAILD_TYPE.NOT_NULL);
+export const NotNull: (message?: string) => PropertyDecorator = vaildDecoratorFactory(
+    VAILD_TYPE.NOT_NULL, (param) => param !== undefined
+);
 
-function vaildDecoratorFactory(type: VAILD_TYPE): () => PropertyDecorator {
+function vaildDecoratorFactory(type: VAILD_TYPE, handle: VaildFunction): () => PropertyDecorator {
+    vaildFunctions[type] = handle;
     return function(message?: string): PropertyDecorator {
         return vaildProperty(type, message);
     };
@@ -41,9 +49,10 @@ function vaildProperty(type: VAILD_TYPE, message?: string): PropertyDecorator {
     return (model: Object, propertyKey: string) => {
         let metadataList: interfaces.PropertyMetadata[] = getVaildModelMetadata(model.constructor);
         metadataList.push({
+            type: type,
             name: propertyKey,
             message: message || `model ${model.constructor.name} property ${propertyKey} vaild failed => ${VAILD_TYPE[type]}`,
-            type: type
+            handle: vaildFunctions[type]
         })
         Reflect.defineMetadata(METADATA_KEY.vaildModel, metadataList, model.constructor);
     }
