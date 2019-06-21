@@ -38,8 +38,9 @@ function rebuildServer(container: Container) {
     // get all controller
     let controllers = container.getAll<express_interfaces.Controller>(TYPE.Controller)
     // for loop controllers and inject proxy to each method
+    container.unbind(TYPE.Controller);
     for (const controller of controllers) {
-        container.rebind(TYPE.Controller)
+        container.bind(TYPE.Controller)
             .to(controller.constructor as any)
             .inSingletonScope()
             .whenTargetNamed(controller.constructor.name)
