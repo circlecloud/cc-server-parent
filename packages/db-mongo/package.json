@@ -1,6 +1,6 @@
 {
     "name": "@cc-server/db-mongo",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
     "homepage": "https://faas.yumc.pw",
@@ -18,8 +18,8 @@
         "url": "git+https://github.com/502647092/cc-server-parent.git"
     },
     "dependencies": {
-        "@cc-server/db": "^0.3.0",
-        "@cc-server/ioc": "^0.3.1",
+        "@cc-server/db": "^0.3.2",
+        "@cc-server/ioc": "^0.3.2",
         "inversify": "^5.0.1",
         "mongodb": "^3.2.7",
         "reflect-metadata": "^0.1.13"
