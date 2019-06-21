@@ -1,5 +1,5 @@
 {
-    "name": "cc-server-db",
+    "name": "@cc-server/db",
     "version": "0.3.0",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",

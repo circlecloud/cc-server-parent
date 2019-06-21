@@ -1,7 +1,7 @@
 import { Db, ObjectID, Collection } from 'mongodb';
 import { MongoDBConnection } from './connection';
-import { provide } from 'cc-server-ioc'
-import { DBClient } from 'cc-server-db'
+import { provide } from '@cc-server/ioc'
+import { DBClient } from '@cc-server/db'
 
 @provide(DBClient)
 export class MongoDBClient<T = any> implements DBClient {

@@ -2,8 +2,8 @@ import {
     controller, response, requestBody, httpGet, httpPost, queryParam, requestParam
 } from 'inversify-express-utils';
 import { inject, postConstruct } from 'inversify';
-import { Vaild, NotBlank, NotNull } from 'cc-server-binding'
-import { DBClient } from 'cc-server-db'
+import { Vaild, NotBlank, NotNull } from '@cc-server/binding'
+import { DBClient } from '@cc-server/db'
 import 'cc-server-db-mongo'
 
 //process.env.FAAS_MONGO_URL = 'mongodb://192.168.0.2:27017';

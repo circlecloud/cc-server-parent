@@ -2,8 +2,8 @@ import 'reflect-metadata';
 import * as express from "express";
 import { InversifyExpressServer, interfaces, getRouteInfo } from 'inversify-express-utils';
 import * as bodyParser from 'body-parser';
-import { buildProviderModule } from 'cc-server-ioc';
-import { rebuildServer } from 'cc-server-binding'
+import { buildProviderModule } from '@cc-server/ioc';
+import { rebuildServer } from '@cc-server/binding'
 import * as prettyjson from "prettyjson";
 import { Container } from 'inversify';
 

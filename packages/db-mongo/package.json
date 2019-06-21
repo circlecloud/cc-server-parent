@@ -1,5 +1,5 @@
 {
-    "name": "cc-server-ioc",
+    "name": "@cc-server/db-mongo",
     "version": "0.3.1",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
@@ -18,12 +18,14 @@
         "url": "git+https://github.com/502647092/cc-server-parent.git"
     },
     "dependencies": {
+        "@cc-server/db": "^0.3.0",
+        "@cc-server/ioc": "^0.3.1",
         "inversify": "^5.0.1",
-        "inversify-binding-decorators": "^4.0.0",
-        "reflect-metadata": "^0.1.13",
-        "ts-node-dev": "^1.0.0-pre.40"
+        "mongodb": "^3.2.7",
+        "reflect-metadata": "^0.1.13"
     },
     "devDependencies": {
+        "@types/mongodb": "^3.1.28",
         "mocha": "^6.1.4",
         "rimraf": "^2.6.3",
         "typescript": "^3.5.1"
