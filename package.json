@@ -7,7 +7,7 @@
     "license": "MIT",
     "scripts": {
         "build": "npx lerna run build",
-        "lp": "npx lerna publish --registry=https://repo.yumc.pw/repository/npm-hosted/",
+        "lp": "npx lerna publish",
         "publish-please": "publish-please",
         "prepublishOnly": "publish-please guard"
     },
