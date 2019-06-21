@@ -4,7 +4,7 @@ import {
 import { inject, postConstruct } from 'inversify';
 import { Vaild, NotBlank, NotNull } from '@cc-server/binding'
 import { DBClient } from '@cc-server/db'
-import 'cc-server-db-mongo'
+import '@cc-server/db-mongo'
 
 //process.env.FAAS_MONGO_URL = 'mongodb://192.168.0.2:27017';
 //process.env.FAAS_MONGO_DB = "faas";
