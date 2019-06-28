@@ -23,15 +23,17 @@
         "@cc-server/binding": "^0.3.3",
         "@cc-server/db-mongo": "^0.3.3",
         "@cc-server/ioc": "^0.3.3",
+        "@cc-server/ws": "^0.3.3",
         "body-parser": "^1.19.0",
         "inversify": "^5.0.1",
         "inversify-express-utils": "^6.3.2",
         "prettyjson": "^1.2.1",
-        "reflect-metadata": "^0.1.13"
+        "socket.io": "^2.2.0"
     },
     "devDependencies": {
         "@types/body-parser": "^1.17.0",
         "@types/express": "^4.17.0",
+        "@types/socket.io": "^2.1.2",
         "@types/prettyjson": "^0.0.29",
         "mocha": "^6.1.4",
         "rimraf": "^2.6.3",

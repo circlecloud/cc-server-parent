@@ -1,5 +1,5 @@
 {
-    "name": "@cc-server/ioc",
+    "name": "@cc-server/ws",
     "version": "0.3.3",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
@@ -10,6 +10,7 @@
         "registry": "https://repo.yumc.pw/repository/npm-hosted/"
     },
     "scripts": {
+        "watch": "npx tsc --watch",
         "build": "rimraf dist && npx tsc",
         "test": "echo \"Error: run tests from root\" && exit 1"
     },
@@ -19,10 +20,11 @@
     },
     "dependencies": {
         "inversify": "^5.0.1",
-        "inversify-binding-decorators": "^4.0.0",
-        "reflect-metadata": "^0.1.13"
+        "reflect-metadata": "^0.1.13",
+        "socket.io": "^2.2.0"        
     },
     "devDependencies": {
+        "@types/socket.io": "^2.1.2",
         "mocha": "^6.1.4",
         "rimraf": "^2.6.3",
         "typescript": "^3.5.1"

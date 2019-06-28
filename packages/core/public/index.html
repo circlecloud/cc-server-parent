@@ -1,0 +1,55 @@
+<html>
+
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/socket.io-client@2.2.0/dist/socket.io.js"> </script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@3.12.2/dist/xterm.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@3.12.2/dist/addons/fullscreen/fullscreen.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/xterm@3.12.2/dist/xterm.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/xterm@3.12.2/dist/addons/fit/fit.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/xterm@3.12.2/dist/addons/attach/attach.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/xterm@3.12.2/dist/addons/fullscreen/fullscreen.js"></script>
+	<style>
+		#terminal-container .terminal.xterm {
+			height: 100%;
+		}
+
+		#terminal-container .xterm-viewport {
+			height: 100% !important;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="terminal" style="height: 100%;"></div>
+	<script type="text/javascript">
+		Terminal.applyAddon(fit);
+		Terminal.applyAddon(attach);
+        Terminal.applyAddon(fullscreen);
+		var term = new Terminal();
+        term.open(document.getElementById('terminal'));
+        term.toggleFullScreen();
+        term.fit();
+		var socket = io('',{
+            path: '/ws'
+        });
+        socket.on('connect', function(){
+            term.writeln('connect')
+        });
+        term.on('data', (data) => {
+            if (data =='\r') {
+                term.writeln(data)
+            }
+            socket.send(data);
+        });
+        socket.on('message', function(data){
+            term.write(data.toString());
+        });
+        socket.on('disconnect', function(){
+            term.reset();
+            term.writeln('disconnect')
+        });
+	</script>
+</body>
+
+</html>

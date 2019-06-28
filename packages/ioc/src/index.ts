@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { Container, inject, interfaces } from 'inversify';
+import { Container, inject, interfaces, injectable, postConstruct } from 'inversify';
 import { autoProvide, provide, fluentProvide, buildProviderModule } from 'inversify-binding-decorators';
 
 const provideNamed = (identifier: interfaces.ServiceIdentifier<any>, name: string) => {
@@ -14,4 +14,4 @@ const provideSingleton = (identifier: interfaces.ServiceIdentifier<any>) => {
         .done();
 };
 
-export { autoProvide, provide, provideNamed, provideSingleton, inject, buildProviderModule };
+export { autoProvide, provide, provideNamed, provideSingleton, Container, inject, injectable, postConstruct, buildProviderModule };

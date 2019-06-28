@@ -14,6 +14,7 @@
         "url": "git+https://github.com/502647092/cc-server-parent.git"
     },
     "scripts": {
+        "watch": "npx tsc --watch",
         "build": "rimraf dist && npx tsc",
         "test": "echo \"Error: run tests from root\" && exit 1"
     },
