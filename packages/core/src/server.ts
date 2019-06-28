@@ -1,6 +1,7 @@
 import { CcServerBoot, express } from './index'
 
-import './function/handle';
+import './function/http';
+import './function/websocket';
 
 let server = new CcServerBoot();
 
