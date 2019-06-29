@@ -19,6 +19,7 @@
         "url": "git+https://github.com/502647092/cc-server-parent.git"
     },
     "dependencies": {
+        "@cc-server/ioc": "^0.5.0",
         "inversify": "^5.0.1",
         "reflect-metadata": "^0.1.13",
         "socket.io": "^2.2.0"

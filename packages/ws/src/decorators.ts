@@ -1,8 +1,7 @@
-import { inject, injectable, decorate } from "inversify";
 import { interfaces } from './interfaces'
-import { METADATA_KEY, TYPE } from './constants'
+import { METADATA_KEY } from './constants'
+import { injectable, decorate } from "inversify";
 import { getNamespaceListenerMetadata, getNamespacesMetadata } from './utils'
-import { provideNamed, fluentProvide } from "@cc-server/ioc/src";
 
 /**
  * Socket.io Namespace
@@ -17,10 +16,6 @@ export function namespace(name?: string, ...middleware: interfaces.Middleware[])
             target: target
         };
         decorate(injectable(), target);
-        //decorate(fluentProvide(TYPE.Namespace)
-            // .inSingletonScope()
-            // .whenTargetNamed(target.constructor.name)
-            // .done(), target);
         Reflect.defineMetadata(METADATA_KEY.namespace, currentMetadata, target);
         const previousMetadata: interfaces.NamespaceMetadata[] = getNamespacesMetadata();
         Reflect.defineMetadata(METADATA_KEY.namespace, [currentMetadata, ...previousMetadata], Reflect);

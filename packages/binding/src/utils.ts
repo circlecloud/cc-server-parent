@@ -1,5 +1,5 @@
-import { METADATA_KEY } from './constants'
 import { interfaces } from './interfaces'
+import { METADATA_KEY } from './constants'
 
 function getVaildControllerMetadata(model: Object) {
     let controllerMetadata: interfaces.MethodMetadata = Reflect.getMetadata(

@@ -1,6 +1,6 @@
+import { lazyInjectNamed } from '@cc-server/ioc'
 import { controller, httpPost, requestBody } from '@cc-server/binding';
 import { namespace, listener, interfaces, io, TYPE } from '@cc-server/ws'
-import { lazyInjectNamed } from '@cc-server/ioc'
 
 @namespace('/', (socket: io.Socket, next: (err?: any) => void) => {
     console.log(socket.nsp.name, socket.id, 'before connection');

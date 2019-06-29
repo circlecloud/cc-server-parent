@@ -4,24 +4,15 @@ const connStr = process.env.FAAS_MONGO_URL || 'mongodb://192.168.0.2:27017';
 const dbName = process.env.FAAS_MONGO_DB || "faas";
 
 export class MongoDBConnection {
-    private static isConnected: boolean = false;
     private static db: Db;
 
-    public static getConnection(result: (connection: Db) => void) {
-        if (this.isConnected) {
-            return result(this.db);
-        } else {
-            this.connect((error: Error, db: Db) => {
-                return result(this.db);
-            });
-        }
+    public static async getConnection(): Promise<Db> {
+        if (!this.db) { this.db = await this.connect() }
+        return this.db;
     }
 
-    private static connect(result: (error: Error, db: Db) => void) {
-        MongoClient.connect(connStr, { useNewUrlParser: true }, (err, client) => {
-            this.db = client.db(dbName);
-            this.isConnected = true;
-            return result(err, this.db);
-        });
+    private static async connect(): Promise<Db> {
+        let client = await MongoClient.connect(connStr, { useNewUrlParser: true });
+        return client.db(dbName);
     }
 }

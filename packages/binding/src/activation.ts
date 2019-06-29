@@ -1,7 +1,7 @@
+import { VaildError } from './interfaces'
+import { METADATA_KEY } from './constants'
 import { Container, interfaces as inversify_interfaces } from 'inversify'
 import { TYPE, interfaces as express_interfaces } from 'inversify-express-utils'
-import { METADATA_KEY } from './constants'
-import { VaildError } from './interfaces'
 import { getVaildMethodMetadata, getVaildControllerMetadata, getVaildModelMetadata } from './utils'
 
 let handler = {

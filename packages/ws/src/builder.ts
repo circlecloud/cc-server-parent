@@ -1,9 +1,9 @@
 import "reflect-metadata";
-import { Container } from 'inversify'
-import { interfaces, BroadcastMessage } from './interfaces'
-import { TYPE } from './constants'
-import { getNamespaces, getNamespaceMetadata, getNamespaceListenerMetadata } from './utils'
 import * as io from 'socket.io'
+import { Container } from 'inversify'
+import { TYPE } from './constants'
+import { interfaces, BroadcastMessage } from './interfaces'
+import { getNamespaces, getNamespaceMetadata, getNamespaceListenerMetadata } from './utils'
 
 export function buildWebSocket(container: Container, server: io.Server) {
     let constructors = getNamespaces();
@@ -53,10 +53,6 @@ function flatten(arr: Array<any>) {
 }
 
 function applyMiddlewares(namespaceEventMetadata: interfaces.ListenerMetadata[], socket: io.Socket) {
-    // socket.use((packet: io.Packet, next: (err?: any) => void) => {
-    //     Reflect.defineMetadata(TYPE.SocketContext, socket, packet);
-    //     next();
-    // })
     let middlewares = [...new Set(flatten(namespaceEventMetadata.map((data) => data.middleware)))];
     for (const middleware of middlewares) {
         socket.use((packet: io.Packet, next: (err?: any) => void) => { middleware(socket, packet, next); });

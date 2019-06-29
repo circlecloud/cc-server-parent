@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { METADATA_KEY, VAILD_TYPE } from './constants';
-import { getVaildControllerMetadata, getVaildModelMetadata } from './utils'
 import { VaildFunction, interfaces } from './interfaces'
+import { getVaildControllerMetadata, getVaildModelMetadata } from './utils'
 /**
  * ParameterVaild
  */

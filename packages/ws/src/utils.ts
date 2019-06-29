@@ -1,5 +1,5 @@
-import { METADATA_KEY, TYPE } from './constants'
 import { interfaces } from './interfaces'
+import { METADATA_KEY } from './constants'
 
 function getNamespaces() {
     return getNamespacesMetadata().map((target) => target.target);
@@ -29,14 +29,9 @@ function getNamespaceListenerMetadata(target: any) {
     return eventMetadata;
 }
 
-function getSocketContext(packet: any) {
-    return Reflect.getMetadata(TYPE.SocketContext, packet);
-}
-
 export {
     getNamespaces,
     getNamespaceMetadata,
     getNamespacesMetadata,
-    getNamespaceListenerMetadata,
-    getSocketContext
+    getNamespaceListenerMetadata
 }

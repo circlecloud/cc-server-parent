@@ -1,7 +1,7 @@
-import { Db, ObjectID, Collection } from 'mongodb';
-import { MongoDBConnection } from './connection';
-import { provide } from '@cc-server/ioc'
 import { DBClient } from '@cc-server/db'
+import { MongoDBConnection } from './connection'
+import { Db, ObjectID, Collection } from 'mongodb'
+import { provide, postConstruct } from '@cc-server/ioc'
 
 @provide(DBClient)
 export class MongoDBClient<T = any> implements DBClient {
@@ -9,13 +9,12 @@ export class MongoDBClient<T = any> implements DBClient {
     private db: Db;
     private collection: Collection<T>;
 
-    constructor() {
-        MongoDBConnection.getConnection((connection) => {
-            this.db = connection;
-            if (this.table) {
-                this.collection = this.db.collection(this.table);
-            }
-        });
+    @postConstruct()
+    private async init() {
+        this.db = await MongoDBConnection.getConnection();
+        if (this.table) {
+            this.collection = this.db.collection(this.table);
+        }
     }
 
     public getProvide<P>(): P {
