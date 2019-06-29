@@ -1,13 +1,15 @@
-import { getNamespacesMetadata, getNamespaceMetadata, getNamespaceListenerMetadata } from './utils'
+import { TYPE } from './constants'
+import { interfaces } from './interfaces'
+import { getContainer } from '@cc-server/ioc'
+import { getNamespaceMetadata, getNamespaceListenerMetadata } from './utils'
 
 export function getNamespaceInfo() {
-    let namespaces = getNamespacesMetadata();
-    console.log(namespaces)
+    let namespaces = getContainer().getAll<interfaces.Namespace>(TYPE.Namespace)
     return namespaces.map(namespace => {
-        let listenerMetadata = getNamespaceListenerMetadata(namespace.target);
-        console.log(namespace, listenerMetadata)
+        let namespaceMetadata = getNamespaceMetadata(namespace);
+        let listenerMetadata = getNamespaceListenerMetadata(namespace);
         return {
-            namespace: namespace.name,
+            namespace: namespaceMetadata.name,
             listeners: listenerMetadata.map(listener => {
                 return {
                     event: listener.name,
