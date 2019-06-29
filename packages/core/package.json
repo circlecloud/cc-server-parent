@@ -25,6 +25,7 @@
         "@cc-server/ioc": "^0.4.0",
         "@cc-server/ws": "^0.4.0",
         "body-parser": "^1.19.0",
+        "globby": "^9.2.0",
         "inversify": "^5.0.1",
         "inversify-express-utils": "^6.3.2",
         "prettyjson": "^1.2.1",

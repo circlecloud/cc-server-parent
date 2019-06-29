@@ -1,4 +1,6 @@
-import { namespace, listener, interfaces, io } from '@cc-server/ws'
+import { controller, httpPost, requestBody } from '@cc-server/binding';
+import { namespace, listener, interfaces, io, TYPE } from '@cc-server/ws'
+import { lazyInjectNamed } from '@cc-server/ioc'
 
 @namespace('/', (socket: io.Socket, next: (err?: any) => void) => {
     console.log(socket.nsp.name, socket.id, 'before connection');
@@ -29,5 +31,19 @@ export class Namespace extends interfaces.Namespace {
             return result;
         }
         return data;
+    }
+}
+
+@controller('/websocket')
+export class WebSocketController {
+    @lazyInjectNamed(TYPE.Namespace, Namespace.name)
+    private root: Namespace;
+
+    @httpPost('/')
+    public async create(
+        @requestBody() model: Object
+    ): Promise<Object> {
+        this.root.nsp.send(JSON.stringify(model));
+        return model;
     }
 }

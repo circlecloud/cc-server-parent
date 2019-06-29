@@ -1,0 +1,21 @@
+@url=https://faas.n.yumc.pw
+
+### 
+GET {{url}}/example
+
+### 
+POST {{url}}/example
+
+{
+    "username": 1
+}
+
+###
+@websocket={{url}}/websocket
+
+###
+POST {{websocket}}
+
+{
+    "name":"Socket.IO"
+}

@@ -15,7 +15,7 @@ let handler = {
                 let origin = argumentsList[param.index];
                 let props = getVaildModelMetadata(param.type);
                 for (const prop of props) {
-                    if (!prop.handle(origin[prop.name])) {
+                    if (!origin || !prop.handle(origin[prop.name])) {
                         throw new VaildError(prop.message);
                     }
                 }
