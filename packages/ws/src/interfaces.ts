@@ -2,19 +2,22 @@ import * as io from 'socket.io'
 import { injectable } from 'inversify';
 
 export class Message {
-    constructor(public message: any) { }
+    constructor(public message: any, public event?: string) { }
 }
-export class BroadcastMessage {
-    constructor(public message: any) { }
+export class BroadcastMessage extends Message {
 }
 
 export namespace interfaces {
     @injectable()
     export class Namespace {
         /**
-         * @see io.Namespace
-         */
+        * @see io.Namespace
+        */
         public nsp?: io.Namespace;
+        /**
+         * Defer Functions Array
+         */
+        public defers?: ((socket: io.Socket) => void)[] = [];
         /**
          * The event fired when we get a new connection
          * @param socket socket
@@ -27,22 +30,28 @@ export namespace interfaces {
          */
         public disconnect?(socket: io.Socket): void;
         /**
-         * broadcast message on this namespace
+         * add disconnect defer function
          */
-        public broadcast(message: any): BroadcastMessage {
-            return new BroadcastMessage(message);
+        protected defer?(fn: (socket: io.Socket) => void) {
+            this.defers.push(fn);
         }
         /**
          * Event Listener
          * @param data event data
          * @return return data will send use socket.emit(key, data)
          */
-        [key: string]: ((data: any, socket: io.Socket) => any) | any;
+        [key: string]: ((socket: io.Socket, data: any) => any) | any;
     }
 
+    /**
+     * Namespace Middleware
+     */
     export interface Middleware {
         (socket: io.Socket, next: (err?: any) => void): void;
     }
+    /**
+     * Listener Middleware
+     */
     export interface ListenerMiddleware {
         (socket: io.Socket, packet: io.Packet, next: (err?: any) => void): void;
     }

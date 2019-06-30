@@ -2,7 +2,7 @@ import "reflect-metadata";
 import * as io from 'socket.io'
 import { Container } from 'inversify'
 import { TYPE } from './constants'
-import { interfaces, BroadcastMessage } from './interfaces'
+import { interfaces, Message, BroadcastMessage } from './interfaces'
 import { getNamespaces, getNamespaceMetadata, getNamespaceListenerMetadata } from './utils'
 
 export function buildWebSocket(container: Container, server: io.Server) {
@@ -66,9 +66,12 @@ async function applyEvent(namespaceInstance: interfaces.Namespace, socket: io.So
             socket.send(result);
         }
     }
-    if (namespaceInstance.disconnect) {
-        socket.on('disconnect', async () => await namespaceInstance.disconnect(socket));
-    }
+    socket.on('disconnect', async () => {
+        await namespaceInstance.defers.forEach(defer => defer(socket));
+        if (namespaceInstance.disconnect) {
+            await namespaceInstance.disconnect(socket);
+        }
+    });
 }
 
 function applyListeners(namespaceEventMetadata: interfaces.ListenerMetadata[], socket: io.Socket, namespaceInstance: interfaces.Namespace) {
@@ -76,10 +79,13 @@ function applyListeners(namespaceEventMetadata: interfaces.ListenerMetadata[], s
         socket.on(event.name, async data => {
             let result = await namespaceInstance[event.key](socket, data);
             if (result != undefined) {
-                if (result instanceof BroadcastMessage) {
-                    socket.broadcast.emit(event.name, result.message);
-                }
-                else {
+                if (result instanceof Message) {
+                    if (result instanceof BroadcastMessage) {
+                        socket.broadcast.emit(result.event || event.name, result.message);
+                    } else {
+                        socket.emit(result.event || event.name, result.message);
+                    }
+                } else {
                     socket.emit(event.name, result);
                 }
             }

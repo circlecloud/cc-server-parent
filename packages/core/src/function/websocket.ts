@@ -1,6 +1,6 @@
 import { lazyInjectNamed } from '@cc-server/ioc'
 import { controller, httpPost, requestBody } from '@cc-server/binding';
-import { namespace, listener, interfaces, io, TYPE } from '@cc-server/ws'
+import { namespace, listener, interfaces, BroadcastMessage, io, TYPE } from '@cc-server/ws'
 
 @namespace('/', (socket: io.Socket, next: (err?: any) => void) => {
     console.log(socket.nsp.name, socket.id, 'before connection');
@@ -11,6 +11,7 @@ export class Namespace extends interfaces.Namespace {
 
     public async connection(socket: io.Socket) {
         console.log(this.nsp.name, socket.id, 'connection');
+        this.defer(socket => console.log(this.nsp.name, socket.id, 'defer', this))
         return `Welcome to Websocket Chat Room Now: ${Date.now()} Your ID: ${socket.id}! \n`;
     }
 
@@ -26,7 +27,7 @@ export class Namespace extends interfaces.Namespace {
         console.log(this.nsp.name, socket.id, 'message', data)
         this.cache[socket.id] = (this.cache[socket.id] || '') + data;
         if (data == '\r' && this.cache[socket.id] !== "") {
-            let result = this.broadcast(this.cache[socket.id] + '\n')
+            let result = new BroadcastMessage(this.cache[socket.id] + '\n')
             this.cache[socket.id] = '';
             return result;
         }
