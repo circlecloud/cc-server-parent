@@ -1,6 +1,6 @@
 {
     "name": "@cc-server/ws",
-    "version": "0.5.1",
+    "version": "0.6.0",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
     "homepage": "https://faas.yumc.pw",
@@ -19,7 +19,7 @@
         "url": "git+https://github.com/502647092/cc-server-parent.git"
     },
     "dependencies": {
-        "@cc-server/ioc": "^0.5.1",
+        "@cc-server/ioc": "^0.6.0",
         "inversify": "^5.0.1",
         "reflect-metadata": "^0.1.13",
         "socket.io": "^2.2.0"
