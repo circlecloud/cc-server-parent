@@ -29,9 +29,18 @@ function getNamespaceListenerMetadata(target: any) {
     return eventMetadata;
 }
 
+function getSocketDeferMetadata(target: any) {
+    let socketDeferMetadata: interfaces.SocketEvent[] = Reflect.getMetadata(
+        METADATA_KEY.defer,
+        target
+    ) || [];
+    return socketDeferMetadata;
+}
+
 export {
     getNamespaces,
     getNamespaceMetadata,
     getNamespacesMetadata,
-    getNamespaceListenerMetadata
+    getNamespaceListenerMetadata,
+    getSocketDeferMetadata
 }

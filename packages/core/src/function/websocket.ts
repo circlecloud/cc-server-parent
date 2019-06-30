@@ -11,8 +11,8 @@ export class Namespace extends interfaces.Namespace {
 
     public async connection(socket: io.Socket) {
         console.log(this.nsp.name, socket.id, 'connection');
-        this.defer(socket => console.log(this.nsp.name, socket.id, 'defer', this))
-        return `Welcome to Websocket Chat Room Now: ${Date.now()} Your ID: ${socket.id}! \n`;
+        this.defer(socket, socket => console.log(this.nsp.name, socket.id, 'defer', this))
+        return `Welcome to Websocket Chat Room Now: ${Date.now()} Your ID: ${socket.id}! \r\n`;
     }
 
     public async disconnect(socket: io.Socket) {
@@ -28,8 +28,7 @@ export class Namespace extends interfaces.Namespace {
         this.cache[socket.id] = (this.cache[socket.id] || '') + data;
         if (data == '\r' && this.cache[socket.id] !== "") {
             let result = new BroadcastMessage(this.cache[socket.id] + '\n')
-            this.cache[socket.id] = '';
-            return result;
+            return delete this.cache[socket.id] && result;
         }
         return data;
     }

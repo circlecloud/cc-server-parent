@@ -5,5 +5,6 @@ export const TYPE = {
 
 export const METADATA_KEY = {
     namespace: "@cc-server/ws:namespace",
-    listener: "@cc-server/ws:listener"
+    listener: "@cc-server/ws:listener",
+    defer: "@cc-server/ws:defer"
 };

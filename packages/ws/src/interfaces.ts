@@ -1,23 +1,24 @@
 import * as io from 'socket.io'
 import { injectable } from 'inversify';
+import { getSocketDeferMetadata } from './utils'
 
 export class Message {
     constructor(public message: any, public event?: string) { }
+}
+export class EventMessage extends Message {
 }
 export class BroadcastMessage extends Message {
 }
 
 export namespace interfaces {
+    export type SocketEvent = ((socket: io.Socket) => void);
+
     @injectable()
     export class Namespace {
         /**
         * @see io.Namespace
         */
         public nsp?: io.Namespace;
-        /**
-         * Defer Functions Array
-         */
-        public defers?: ((socket: io.Socket) => void)[] = [];
         /**
          * The event fired when we get a new connection
          * @param socket socket
@@ -32,8 +33,8 @@ export namespace interfaces {
         /**
          * add disconnect defer function
          */
-        protected defer?(fn: (socket: io.Socket) => void) {
-            this.defers.push(fn);
+        protected defer?(socket: io.Socket, fn: SocketEvent) {
+            getSocketDeferMetadata(socket).unshift(fn);
         }
         /**
          * Event Listener
