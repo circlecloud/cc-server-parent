@@ -1,11 +1,7 @@
-import { TYPE, io } from '@cc-server/ws'
 import { DBClient } from '@cc-server/db'
 import { inject, postConstruct } from '@cc-server/ioc';
-import { Vaild, NotBlank, NotNull, controller, requestBody, httpGet, httpPost, requestParam } from '@cc-server/binding'
+import { Vaild, NotBlank, NotNull, controller, requestBody, get, post, requestParam } from '@cc-server/binding'
 import '@cc-server/db-mongo'
-
-//process.env.FAAS_MONGO_URL = 'mongodb://192.168.0.2:27017';
-//process.env.FAAS_MONGO_DB = "faas";
 
 const TABLE = 'users'
 
@@ -29,30 +25,29 @@ export class Controller {
         this.client.setTable(TABLE);
     }
 
-    @httpGet('/')
+    @get('/')
     public async list(): Promise<ExampleModel[]> {
         return this.client.find({});
     }
 
-    @httpGet('/:id')
+    @get('/:id')
     public async get(
         @requestParam('id') id: string
     ): Promise<ExampleModel> {
         return this.client.findOneById(id);
     }
 
-    @httpPost('/')
+    @post('/')
     public async create(
         @Vaild() @requestBody() model: ExampleModel
     ): Promise<ExampleModel> {
         return model;
-        //return this.client.insertOne(model);
     }
 
-    @httpPost('/:id')
+    @post('/:id')
     public async update(
         @requestParam('id') id: string,
-        @requestBody() model: ExampleModel
+        @Vaild() @requestBody() model: ExampleModel
     ): Promise<boolean> {
         return this.client.updateById(id, model);
     }
