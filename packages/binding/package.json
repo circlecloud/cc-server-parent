@@ -1,11 +1,12 @@
 {
     "name": "@cc-server/binding",
-    "version": "0.6.3",
+    "version": "0.6.4",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
     "homepage": "https://github.com/502647092/cc-server-parent#readme",
     "license": "ISC",
     "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
     "publishConfig": {
         "registry": "https://repo.yumc.pw/repository/npm-hosted/"
     },

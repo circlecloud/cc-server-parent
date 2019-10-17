@@ -1,11 +1,12 @@
 {
     "name": "@cc-server/core",
-    "version": "0.6.3",
+    "version": "0.6.4",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
     "homepage": "https://github.com/502647092/cc-server-parent#readme",
     "license": "ISC",
     "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
     "publishConfig": {
         "registry": "https://repo.yumc.pw/repository/npm-hosted/"
     },
@@ -20,10 +21,10 @@
         "url": "git+https://github.com/502647092/cc-server-parent.git"
     },
     "dependencies": {
-        "@cc-server/binding": "^0.6.3",
-        "@cc-server/db-mongo": "^0.6.3",
-        "@cc-server/ioc": "^0.6.3",
-        "@cc-server/ws": "^0.6.3",
+        "@cc-server/binding": "^0.6.4",
+        "@cc-server/db-mongo": "^0.6.4",
+        "@cc-server/ioc": "^0.6.4",
+        "@cc-server/ws": "^0.6.4",
         "body-parser": "^1.19.0",
         "globby": "^9.2.0",
         "inversify": "^5.0.1",
