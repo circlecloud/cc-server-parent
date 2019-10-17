@@ -122,10 +122,13 @@ export class CcServerBoot {
         return this;
     }
 
-    public start(port: number = 80) {
-        const routeInfo = getRouteInfo(this._container);
-        console.log(prettyjson.render({ routes: routeInfo }));
+    public start() {
+        console.log(prettyjson.render({ routes: { http: getRouteInfo(this._container), websocket: getNamespaceInfo() } }));
+        return this;
+    }
+
+    public listen(port: number = 80) {
         this._server.listen(port);
-        console.log(`Server started on port ${port} :)`);
+        console.log(`Server listen on port ${port} :)`);
     }
 }
