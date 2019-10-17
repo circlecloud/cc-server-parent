@@ -1,6 +1,6 @@
 {
     "name": "@cc-server/core",
-    "version": "0.6.5",
+    "version": "0.6.6",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
     "homepage": "https://github.com/502647092/cc-server-parent#readme",
@@ -21,10 +21,10 @@
         "url": "git+https://github.com/502647092/cc-server-parent.git"
     },
     "dependencies": {
-        "@cc-server/binding": "^0.6.5",
-        "@cc-server/db-mongo": "^0.6.5",
-        "@cc-server/ioc": "^0.6.5",
-        "@cc-server/ws": "^0.6.5",
+        "@cc-server/binding": "^0.6.6",
+        "@cc-server/db-mongo": "^0.6.6",
+        "@cc-server/ioc": "^0.6.6",
+        "@cc-server/ws": "^0.6.6",
         "body-parser": "^1.19.0",
         "globby": "^9.2.0",
         "inversify": "^5.0.1",
