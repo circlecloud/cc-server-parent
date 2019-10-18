@@ -79,6 +79,10 @@ export class CcServerBoot {
             .use(bodyParser.raw());
     }
 
+    get container() {
+        return this._container;
+    }
+
     get server() {
         return this._server;
     }
@@ -122,7 +126,7 @@ export class CcServerBoot {
         return this;
     }
 
-    public start() {
+    public print() {
         console.log(prettyjson.render({ routes: { http: getRouteInfo(this._container), websocket: getNamespaceInfo() } }));
         return this;
     }
@@ -130,5 +134,10 @@ export class CcServerBoot {
     public listen(port: number = 80) {
         this._server.listen(port);
         console.log(`Server listen on port ${port} :)`);
+        return this;
+    }
+
+    public start(port: number = 80) {
+        return this.static('public').build().print().listen(port);
     }
 }

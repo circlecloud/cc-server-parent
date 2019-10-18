@@ -1,31 +1,15 @@
 import { DBClient } from '@cc-server/db'
-import { MongoDBConnection } from './connection'
-import { Db, ObjectID, Collection } from 'mongodb'
-import { provide, postConstruct } from '@cc-server/ioc'
+import { ObjectID, Collection } from 'mongodb'
 
-@provide(DBClient)
-export class MongoDBClient<T = any> implements DBClient {
-    private table: string;
-    private db: Db;
+export class MongoCollection<T = any> implements DBClient {
     private collection: Collection<T>;
 
-    @postConstruct()
-    private async init() {
-        this.db = await MongoDBConnection.getConnection();
-        if (this.table) {
-            this.collection = this.db.collection(this.table);
-        }
+    constructor(collection: Collection<T>) {
+        this.collection = collection;
     }
 
     public getProvide<P>(): P {
-        return this.db as {} as P;
-    }
-
-    public setTable(table: string): void {
-        this.table = table;
-        if (this.db) {
-            this.collection = this.db.collection(table);
-        }
+        return this.collection as {} as P;
     }
 
     public async find(filter: object): Promise<T[]> {

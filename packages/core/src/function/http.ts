@@ -1,9 +1,7 @@
 import { DBClient } from '@cc-server/db'
-import { inject, postConstruct } from '@cc-server/ioc';
+import { inject, named } from '@cc-server/ioc';
 import { Vaild, NotBlank, NotNull, controller, requestBody, get, post, requestParam } from '@cc-server/binding'
 import '@cc-server/db-mongo'
-
-const TABLE = 'users'
 
 class ExampleModel {
     _id: string;
@@ -18,12 +16,8 @@ class ExampleModel {
 @controller('/example')
 export class Controller {
     @inject(DBClient)
+    @named("users")
     private client: DBClient
-
-    @postConstruct()
-    private init(): void {
-        this.client.setTable(TABLE);
-    }
 
     @get('/')
     public async list(): Promise<ExampleModel[]> {
