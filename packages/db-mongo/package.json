@@ -1,6 +1,6 @@
 {
     "name": "@cc-server/db-mongo",
-    "version": "0.6.9",
+    "version": "0.7.0",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
     "homepage": "https://faas.yumc.pw",
@@ -20,17 +20,17 @@
         "url": "git+https://github.com/502647092/cc-server-parent.git"
     },
     "dependencies": {
-        "@cc-server/db": "^0.6.9",
-        "@cc-server/ioc": "^0.6.9",
+        "@cc-server/db": "^0.7.0",
+        "@cc-server/ioc": "^0.7.0",
         "inversify": "^5.0.1",
-        "mongodb": "^3.2.7",
+        "mongodb": "^3.4.1",
         "reflect-metadata": "^0.1.13"
     },
     "devDependencies": {
-        "@types/mongodb": "^3.1.28",
-        "mocha": "^6.1.4",
-        "rimraf": "^2.6.3",
-        "typescript": "^3.5.1"
+        "@types/mongodb": "^3.3.14",
+        "mocha": "^7.0.0",
+        "rimraf": "^3.0.0",
+        "typescript": "^3.7.4"
     },
     "gitHead": "7d84393a3cb6be6be9ed51d71f12677d2d7d0728"
 }
