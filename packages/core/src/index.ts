@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import * as fs from 'fs';
 import * as http from 'http';
+import * as path from 'path';
 import * as globby from "globby";
 import * as express from "express";
 import * as prettyjson from "prettyjson";
@@ -104,11 +105,18 @@ export class CcServerBoot {
         return this;
     }
 
-    public scan(path: fs.PathLike) {
-        let files = fs.readdirSync(path);
-        for (const file of files) {
-
+    public scan(scanDir: string) {
+        let files = fs.readdirSync(scanDir);
+        for (let file of files) {
+            let moduleDir = path.join(scanDir, file)
+            let stat = fs.statSync(moduleDir);
+            if (stat.isDirectory()) {
+                this.scan(moduleDir)
+            } else if (stat.isFile() && (file.endsWith('.js') || file.endsWith('.ts'))) {
+                require(moduleDir);
+            }
         }
+        return this;
     }
 
     public build() {

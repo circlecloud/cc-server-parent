@@ -1,6 +1,6 @@
 {
     "name": "@cc-server/ws",
-    "version": "0.6.9",
+    "version": "0.7.0",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
     "homepage": "https://faas.yumc.pw",
@@ -20,16 +20,16 @@
         "url": "git+https://github.com/502647092/cc-server-parent.git"
     },
     "dependencies": {
-        "@cc-server/ioc": "^0.6.9",
+        "@cc-server/ioc": "^0.7.0",
         "inversify": "^5.0.1",
         "reflect-metadata": "^0.1.13",
-        "socket.io": "^2.2.0"
+        "socket.io": "^2.3.0"
     },
     "devDependencies": {
-        "@types/socket.io": "^2.1.2",
-        "mocha": "^6.1.4",
-        "rimraf": "^2.6.3",
-        "typescript": "^3.5.1"
+        "@types/socket.io": "^2.1.4",
+        "mocha": "^7.0.0",
+        "rimraf": "^3.0.0",
+        "typescript": "^3.7.4"
     },
     "gitHead": "7d84393a3cb6be6be9ed51d71f12677d2d7d0728"
 }

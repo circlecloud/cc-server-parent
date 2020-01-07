@@ -16,7 +16,7 @@ export class MongoCollection<T = any> implements DBClient {
         return await this.collection.find(filter).toArray();
     }
 
-    public async findOne(filter: Object): Promise<T> {
+    public async findOne(filter: object): Promise<T> {
         let result = await this.collection.find(filter).limit(1).toArray();
         return result[0];
     }
@@ -26,20 +26,21 @@ export class MongoCollection<T = any> implements DBClient {
     }
 
     public async insertOne(model: T): Promise<T> {
+        //@ts-ignore
         var insert = await this.collection.insertOne(model);
         return insert.ops[0];
     }
 
-    public async updateOne(where: any, model: any): Promise<boolean> {
+    public async updateOne(where: any, model: T): Promise<boolean> {
         let result = await this.collection.updateOne(where, { $set: model });
         return result.result.ok == 1 && result.result.n > 0;
     }
 
-    public async updateById(objectId: string, model: any): Promise<boolean> {
+    public async updateById(objectId: string, model: T): Promise<boolean> {
         return await this.updateOne({ _id: new ObjectID(objectId) }, model)
     }
 
-    public async deleteOne(where: any): Promise<boolean> {
+    public async deleteOne(where: object): Promise<boolean> {
         let result = await this.collection.deleteOne(where);
         return result.result.ok === 1 && result.result.n > 0
     }

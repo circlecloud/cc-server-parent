@@ -1,6 +1,6 @@
 {
     "name": "@cc-server/core",
-    "version": "0.6.9",
+    "version": "0.7.0",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
     "homepage": "https://github.com/502647092/cc-server-parent#readme",
@@ -21,27 +21,27 @@
         "url": "git+https://github.com/502647092/cc-server-parent.git"
     },
     "dependencies": {
-        "@cc-server/binding": "^0.6.9",
-        "@cc-server/db-mongo": "^0.6.9",
-        "@cc-server/ioc": "^0.6.9",
-        "@cc-server/ws": "^0.6.9",
+        "@cc-server/binding": "^0.7.0",
+        "@cc-server/db-mongo": "^0.7.0",
+        "@cc-server/ioc": "^0.7.0",
+        "@cc-server/ws": "^0.7.0",
         "body-parser": "^1.19.0",
-        "globby": "^9.2.0",
+        "globby": "^10.0.2",
         "inversify": "^5.0.1",
         "inversify-express-utils": "^6.3.2",
         "prettyjson": "^1.2.1",
-        "socket.io": "^2.2.0"
+        "socket.io": "^2.3.0"
     },
     "devDependencies": {
-        "@types/body-parser": "^1.17.0",
-        "@types/express": "^4.17.0",
+        "@types/body-parser": "^1.17.1",
+        "@types/express": "4.17.0",
         "@types/prettyjson": "^0.0.29",
-        "@types/socket.io": "^2.1.2",
-        "mocha": "^6.1.4",
-        "rimraf": "^2.6.3",
-        "ts-node": "^8.2.0",
-        "ts-node-dev": "^1.0.0-pre.40",
-        "typescript": "^3.5.1"
+        "@types/socket.io": "^2.1.4",
+        "mocha": "^7.0.0",
+        "rimraf": "^3.0.0",
+        "ts-node": "^8.5.4",
+        "ts-node-dev": "^1.0.0-pre.44",
+        "typescript": "^3.7.4"
     },
     "gitHead": "7d84393a3cb6be6be9ed51d71f12677d2d7d0728"
 }

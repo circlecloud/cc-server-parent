@@ -1,6 +1,6 @@
 {
     "name": "@cc-server/binding",
-    "version": "0.6.9",
+    "version": "0.7.0",
     "description": "> TODO: description",
     "author": "MiaoWoo <admin@yumc.pw>",
     "homepage": "https://github.com/502647092/cc-server-parent#readme",
@@ -24,9 +24,9 @@
         "reflect-metadata": "^0.1.13"
     },
     "devDependencies": {
-        "mocha": "^6.1.4",
-        "rimraf": "^2.6.3",
-        "typescript": "^3.5.1"
+        "mocha": "^7.0.0",
+        "rimraf": "^3.0.0",
+        "typescript": "^3.7.4"
     },
     "bugs": {
         "url": "https://github.com/502647092/cc-server-parent/issues"
